@@ -4,6 +4,8 @@ services:
     image: mongo:demo
     volumes:
       - /Users/jmorris2/dev/docker-learning/data:/data/db
+    ports:
+      - 27017:27017
   node:
     image: node:demo
     ports:

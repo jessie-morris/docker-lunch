@@ -1,5 +1,7 @@
 const express = require('express')
 const app = express()
+const MongoClient = require('mongodb').MongoClient;
+const url = "mongodb://docker-lunch_mongo_1:27017/";
 
 function fizzbuzz(fizz) {
   if(fizz % 3 == 0 && fizz % 5 == 0) {
@@ -13,7 +15,18 @@ function fizzbuzz(fizz) {
   }
   return fizz
 }
+function pokemon(pokemonId) {
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("pokemon");
 
-app.get('/:fizz', (req, res) => res.send(fizzbuzz(req.params.fizz)))
-
+    dbo.collection("pokemon").findOne({name: "charizard"}, function(err, result) {
+      if (err) throw err;
+      console.log(result);
+      db.close();
+    });
+  });
+}
+app.get('/fizz/:fizz', (req, res) => res.send(fizzbuzz(req.params.fizz)))
+app.get('/pokemon/:pokemon', (req, res) => res.send(pokemon(req.params.pokemon)))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
