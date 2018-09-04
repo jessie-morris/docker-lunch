@@ -14,6 +14,8 @@ Lets use docker to build a N-tier webapp with proper networking.  Lets also talk
 
 ### Advanced Docker
 
+* It is important to chain many commands such as RUN together as layers are created for each RUN command and previous cached layers (like apt-get update) which provide different results temporily can lead to unexpected behavior
+
 * You can expose the docker daemon over a network and then access it using the -H flag on your client(or set the DOCKER_HOST environment variable).  Since access to the daemon provides significant privledge, you will want to secure this with TLS.
 
 * Sometimes you may need to launch a docker from inside of a docker.  This is typically performed by volume mounting the unix socket running at /var/run/docker.sock  This is typically considered a dangerous setup and should not be performed on production environments.  Whoever (including a user inside your container) can control this socket and the docker daemon typically has near root access to the machine.
