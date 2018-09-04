@@ -1,6 +1,6 @@
 FROM node:10
 
-COPY ./src /src
+COPY . /src
 
 WORKDIR /src
 
