@@ -2,5 +2,7 @@ version: '3'
 services:
   mongo:
     image: mongo:demo
-  ubuntu:
+  node:
     image: node:demo
+    ports:
+      - 80:3000

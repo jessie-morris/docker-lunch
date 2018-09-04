@@ -1,6 +1,11 @@
-const express = require('express')
-const app = express()
+FROM node:10
 
-app.get('/', (req, res) => res.send('Hello World!'))
+COPY ./src /src
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+WORKDIR /src
+
+EXPOSE 3000
+
+RUN npm install
+
+CMD ["node", "index.js"]
